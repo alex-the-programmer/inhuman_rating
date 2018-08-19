@@ -1,5 +1,11 @@
 class City < ApplicationRecord
   has_many :neighbourhoods
 
+  has_many :cities_profiles
+  has_many :profiles, through: :cities_profiles
+
+  has_many :cities_social_profiles
+  has_many :social_profiles, through: :cities_social_profiles
+
   belongs_to :country
 end
