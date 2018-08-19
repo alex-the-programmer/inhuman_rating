@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_08_19_063013) do
+ActiveRecord::Schema.define(version: 2018_08_19_063447) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -23,6 +23,16 @@ ActiveRecord::Schema.define(version: 2018_08_19_063013) do
     t.index ["country_id"], name: "index_cities_on_country_id"
     t.index ["name", "country_id"], name: "index_cities_on_name_and_country_id", unique: true
     t.index ["name"], name: "index_cities_on_name"
+  end
+
+  create_table "cities_profiles", id: false, force: :cascade do |t|
+    t.bigint "city_id", null: false
+    t.bigint "profile_id", null: false
+  end
+
+  create_table "cities_social_profiles", id: false, force: :cascade do |t|
+    t.bigint "city_id", null: false
+    t.bigint "social_profile_id", null: false
   end
 
   create_table "countries", force: :cascade do |t|
@@ -40,6 +50,16 @@ ActiveRecord::Schema.define(version: 2018_08_19_063013) do
     t.index ["city_id"], name: "index_neighbourhoods_on_city_id"
     t.index ["name", "city_id"], name: "index_neighbourhoods_on_name_and_city_id", unique: true
     t.index ["name"], name: "index_neighbourhoods_on_name"
+  end
+
+  create_table "neighbourhoods_profiles", id: false, force: :cascade do |t|
+    t.bigint "neighbourhood_id", null: false
+    t.bigint "profile_id", null: false
+  end
+
+  create_table "neighbourhoods_social_profiles", id: false, force: :cascade do |t|
+    t.bigint "neighbourhood_id", null: false
+    t.bigint "social_profile_id", null: false
   end
 
   create_table "profiles", force: :cascade do |t|
@@ -70,7 +90,15 @@ ActiveRecord::Schema.define(version: 2018_08_19_063013) do
   end
 
   add_foreign_key "cities", "countries"
+  add_foreign_key "cities_profiles", "cities"
+  add_foreign_key "cities_profiles", "profiles"
+  add_foreign_key "cities_social_profiles", "cities"
+  add_foreign_key "cities_social_profiles", "social_profiles"
   add_foreign_key "neighbourhoods", "cities"
+  add_foreign_key "neighbourhoods_profiles", "neighbourhoods"
+  add_foreign_key "neighbourhoods_profiles", "profiles"
+  add_foreign_key "neighbourhoods_social_profiles", "neighbourhoods"
+  add_foreign_key "neighbourhoods_social_profiles", "social_profiles"
   add_foreign_key "profiles_social_profiles", "profiles"
   add_foreign_key "profiles_social_profiles", "social_profiles"
 end
