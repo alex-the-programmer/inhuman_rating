@@ -11,7 +11,8 @@ Things you may want to cover:
 
 * Configuration
 
-* Database creation
+* Database creation: 
+sudo -u postgres psql postgres --command "CREATE ROLE inhuman_rating with superuser login password 'inhuman_rating'"
 
 * Database initialization
 
