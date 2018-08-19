@@ -10,5 +10,10 @@ class CreateSocialProfiles < ActiveRecord::Migration[5.2]
 
       t.timestamps
     end
+
+    create_join_table :profiles, :social_profiles
+
+    add_foreign_key :profiles_social_profiles, :profiles
+    add_foreign_key :profiles_social_profiles, :social_profiles
   end
 end
