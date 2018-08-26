@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_08_19_063447) do
+ActiveRecord::Schema.define(version: 2018_08_26_060048) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -78,6 +78,15 @@ ActiveRecord::Schema.define(version: 2018_08_19_063447) do
     t.bigint "social_profile_id", null: false
   end
 
+  create_table "profiles_stigmas", id: false, force: :cascade do |t|
+    t.bigint "stigma_id", null: false
+    t.bigint "profile_id", null: false
+    t.integer "up_votes", default: 0, null: false
+    t.integer "down_votes", default: 0, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "social_profiles", force: :cascade do |t|
     t.string "social_profile_type"
     t.string "profile_url"
@@ -87,6 +96,15 @@ ActiveRecord::Schema.define(version: 2018_08_19_063447) do
     t.string "user_name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "stigmas", force: :cascade do |t|
+    t.string "stigma_type", null: false
+    t.string "icon_url"
+    t.string "name", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["stigma_type", "name"], name: "index_stigmas_on_stigma_type_and_name", unique: true
   end
 
   add_foreign_key "cities", "countries"

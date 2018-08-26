@@ -7,4 +7,7 @@ class Profile < ApplicationRecord
 
   has_many :neighbourhoods_profiles
   has_many :neighbourhoods, through: :neighbourhoods_profiles
+
+  has_many :profile_stigmata
+  has_many :stigmata, through: :profile_stigmata
 end
