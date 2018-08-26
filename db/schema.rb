@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_08_26_065614) do
+ActiveRecord::Schema.define(version: 2018_08_26_070353) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -115,6 +115,11 @@ ActiveRecord::Schema.define(version: 2018_08_26_065614) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "profiles_school_departments", id: false, force: :cascade do |t|
+    t.bigint "school_department_id", null: false
+    t.bigint "profile_id", null: false
+  end
+
   create_table "profiles_schools", id: false, force: :cascade do |t|
     t.bigint "school_id", null: false
     t.bigint "profile_id", null: false
@@ -132,6 +137,21 @@ ActiveRecord::Schema.define(version: 2018_08_26_065614) do
     t.integer "down_votes", default: 0, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "school_departments", force: :cascade do |t|
+    t.string "name", null: false
+    t.bigint "school_id", null: false
+    t.string "avatar_url"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["school_id", "name"], name: "index_school_departments_on_school_id_and_name", unique: true
+    t.index ["school_id"], name: "index_school_departments_on_school_id"
+  end
+
+  create_table "school_departments_social_profiles", id: false, force: :cascade do |t|
+    t.bigint "school_department_id", null: false
+    t.bigint "social_profile_id", null: false
   end
 
   create_table "school_types", force: :cascade do |t|
@@ -194,11 +214,15 @@ ActiveRecord::Schema.define(version: 2018_08_26_065614) do
   add_foreign_key "neighbourhoods_social_profiles", "social_profiles"
   add_foreign_key "phones_profiles", "phones"
   add_foreign_key "phones_profiles", "profiles"
+  add_foreign_key "profiles_school_departments", "profiles"
+  add_foreign_key "profiles_school_departments", "school_departments"
   add_foreign_key "profiles_schools", "schools"
   add_foreign_key "profiles_social_profiles", "profiles"
   add_foreign_key "profiles_social_profiles", "social_profiles"
   add_foreign_key "profiles_stigmas", "profiles"
   add_foreign_key "profiles_stigmas", "stigmas"
+  add_foreign_key "school_departments_social_profiles", "school_departments"
+  add_foreign_key "school_departments_social_profiles", "social_profiles"
   add_foreign_key "schools", "school_types"
   add_foreign_key "schools_social_profiles", "schools"
 end

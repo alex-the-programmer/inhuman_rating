@@ -22,4 +22,7 @@ class Profile < ApplicationRecord
 
   has_many :profiles_schools
   has_many :schools, through: :profiles_schools
+
+  has_many :profiles_school_departments
+  has_many :school_departments, through: :profiles_school_departments
 end
