@@ -19,4 +19,7 @@ class Profile < ApplicationRecord
 
   has_many :companies_profiles
   has_many :companies, through: :companies_profiles
+
+  has_many :profiles_schools
+  has_many :schools, through: :profiles_schools
 end

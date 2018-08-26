@@ -11,5 +11,8 @@ class SocialProfile < ApplicationRecord
   has_many :companies_social_profiles
   has_many :companies, through: :companies_social_profiles
 
+  has_many :schools_social_profiles
+  has_many :schools, through: :schools_social_profiles
+
   validates_presence_of :social_profile_type, :profile_url
 end
