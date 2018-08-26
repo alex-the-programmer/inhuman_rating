@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_08_26_061520) do
+ActiveRecord::Schema.define(version: 2018_08_26_063725) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -32,6 +32,24 @@ ActiveRecord::Schema.define(version: 2018_08_26_061520) do
 
   create_table "cities_social_profiles", id: false, force: :cascade do |t|
     t.bigint "city_id", null: false
+    t.bigint "social_profile_id", null: false
+  end
+
+  create_table "companies", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "avatar_url"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["name"], name: "index_companies_on_name", unique: true
+  end
+
+  create_table "companies_profiles", id: false, force: :cascade do |t|
+    t.bigint "company_id", null: false
+    t.bigint "profile_id", null: false
+  end
+
+  create_table "companies_social_profiles", id: false, force: :cascade do |t|
+    t.bigint "company_id", null: false
     t.bigint "social_profile_id", null: false
   end
 

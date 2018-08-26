@@ -16,4 +16,7 @@ class Profile < ApplicationRecord
 
   has_many :email_profiles
   has_many :emails, through: :email_profiles
+
+  has_many :companies_profiles
+  has_many :companies, through: :companies_profiles
 end
