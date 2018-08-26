@@ -10,4 +10,7 @@ class Profile < ApplicationRecord
 
   has_many :profile_stigmata
   has_many :stigmata, through: :profile_stigmata
+
+  as_many :phones_profiles
+  has_many :phones, through: :phones_profiles
 end
