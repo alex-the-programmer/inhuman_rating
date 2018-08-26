@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_08_26_064357) do
+ActiveRecord::Schema.define(version: 2018_08_26_065614) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -181,14 +181,24 @@ ActiveRecord::Schema.define(version: 2018_08_26_064357) do
   add_foreign_key "cities_profiles", "profiles"
   add_foreign_key "cities_social_profiles", "cities"
   add_foreign_key "cities_social_profiles", "social_profiles"
+  add_foreign_key "companies_profiles", "companies"
+  add_foreign_key "companies_profiles", "profiles"
+  add_foreign_key "companies_social_profiles", "companies"
+  add_foreign_key "companies_social_profiles", "social_profiles"
+  add_foreign_key "emails_profiles", "emails"
+  add_foreign_key "emails_profiles", "profiles"
   add_foreign_key "neighbourhoods", "cities"
   add_foreign_key "neighbourhoods_profiles", "neighbourhoods"
   add_foreign_key "neighbourhoods_profiles", "profiles"
   add_foreign_key "neighbourhoods_social_profiles", "neighbourhoods"
   add_foreign_key "neighbourhoods_social_profiles", "social_profiles"
+  add_foreign_key "phones_profiles", "phones"
+  add_foreign_key "phones_profiles", "profiles"
   add_foreign_key "profiles_schools", "schools"
   add_foreign_key "profiles_social_profiles", "profiles"
   add_foreign_key "profiles_social_profiles", "social_profiles"
+  add_foreign_key "profiles_stigmas", "profiles"
+  add_foreign_key "profiles_stigmas", "stigmas"
   add_foreign_key "schools", "school_types"
   add_foreign_key "schools_social_profiles", "schools"
 end
