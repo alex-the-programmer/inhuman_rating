@@ -13,4 +13,7 @@ class Profile < ApplicationRecord
 
   as_many :phones_profiles
   has_many :phones, through: :phones_profiles
+
+  has_many :email_profiles
+  has_many :emails, through: :email_profiles
 end
