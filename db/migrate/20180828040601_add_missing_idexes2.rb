@@ -31,5 +31,16 @@ class AddMissingIdexes2 < ActiveRecord::Migration[5.2]
     add_index :questions, [:review_type_id, :question_type_id, :order]
 
     add_index :questions_reviews, [:question_id, :review_id], unique: true
+    add_index :school_departments_social_profiles, [:school_department_id, :social_profile_id], unique: true
+
+    change_column_null :school_types, :name, false
+
+    add_index :schools, :name
+    add_index :schools_social_profiles, [:school_id, :social_profile_id], unique: true
+
+    change_column_null :social_profiles, :social_profile_type, false
+
+    add_index :social_profiles, :first_name
+    add_index :social_profiles, [:last_name, :first_name]
   end
 end
