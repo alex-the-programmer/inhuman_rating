@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_08_28_024305) do
+ActiveRecord::Schema.define(version: 2018_08_28_031050) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -255,6 +255,7 @@ ActiveRecord::Schema.define(version: 2018_08_28_024305) do
   add_foreign_key "phones_profiles", "profiles"
   add_foreign_key "profiles_school_departments", "profiles"
   add_foreign_key "profiles_school_departments", "school_departments"
+  add_foreign_key "profiles_schools", "profiles"
   add_foreign_key "profiles_schools", "schools"
   add_foreign_key "profiles_social_profiles", "profiles"
   add_foreign_key "profiles_social_profiles", "social_profiles"
@@ -270,4 +271,5 @@ ActiveRecord::Schema.define(version: 2018_08_28_024305) do
   add_foreign_key "school_departments_social_profiles", "social_profiles"
   add_foreign_key "schools", "school_types"
   add_foreign_key "schools_social_profiles", "schools"
+  add_foreign_key "schools_social_profiles", "social_profiles"
 end
