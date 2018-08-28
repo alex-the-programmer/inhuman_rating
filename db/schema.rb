@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_08_28_031050) do
+ActiveRecord::Schema.define(version: 2018_08_28_035607) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -20,6 +20,7 @@ ActiveRecord::Schema.define(version: 2018_08_28_031050) do
     t.string "name", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "state_id", null: false
     t.index ["country_id"], name: "index_cities_on_country_id"
     t.index ["name", "country_id"], name: "index_cities_on_name_and_country_id", unique: true
     t.index ["name"], name: "index_cities_on_name"
@@ -226,6 +227,17 @@ ActiveRecord::Schema.define(version: 2018_08_28_031050) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "states", force: :cascade do |t|
+    t.bigint "country_id", null: false
+    t.string "name", null: false
+    t.string "acronym"
+    t.index ["acronym"], name: "index_states_on_acronym"
+    t.index ["country_id", "acronym"], name: "index_states_on_country_id_and_acronym", unique: true
+    t.index ["country_id", "name"], name: "index_states_on_country_id_and_name", unique: true
+    t.index ["country_id"], name: "index_states_on_country_id"
+    t.index ["name"], name: "index_states_on_name"
+  end
+
   create_table "stigmas", force: :cascade do |t|
     t.string "stigma_type", null: false
     t.string "icon_url"
@@ -236,6 +248,7 @@ ActiveRecord::Schema.define(version: 2018_08_28_031050) do
   end
 
   add_foreign_key "cities", "countries"
+  add_foreign_key "cities", "states"
   add_foreign_key "cities_profiles", "cities"
   add_foreign_key "cities_profiles", "profiles"
   add_foreign_key "cities_social_profiles", "cities"
@@ -272,4 +285,5 @@ ActiveRecord::Schema.define(version: 2018_08_28_031050) do
   add_foreign_key "schools", "school_types"
   add_foreign_key "schools_social_profiles", "schools"
   add_foreign_key "schools_social_profiles", "social_profiles"
+  add_foreign_key "states", "countries"
 end
