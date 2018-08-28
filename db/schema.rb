@@ -10,30 +10,33 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_08_28_035607) do
+ActiveRecord::Schema.define(version: 2018_08_28_040601) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "cities", force: :cascade do |t|
-    t.bigint "country_id"
+    t.bigint "country_id", null: false
     t.string "name", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "state_id", null: false
+    t.integer "state_id"
+    t.index ["country_id", "state_id", "name"], name: "index_cities_on_country_id_and_state_id_and_name", unique: true
     t.index ["country_id"], name: "index_cities_on_country_id"
-    t.index ["name", "country_id"], name: "index_cities_on_name_and_country_id", unique: true
     t.index ["name"], name: "index_cities_on_name"
+    t.index ["state_id"], name: "index_cities_on_state_id"
   end
 
   create_table "cities_profiles", id: false, force: :cascade do |t|
     t.bigint "city_id", null: false
     t.bigint "profile_id", null: false
+    t.index ["city_id", "profile_id"], name: "index_cities_profiles_on_city_id_and_profile_id", unique: true
   end
 
   create_table "cities_social_profiles", id: false, force: :cascade do |t|
     t.bigint "city_id", null: false
     t.bigint "social_profile_id", null: false
+    t.index ["city_id", "social_profile_id"], name: "index_cities_social_profiles_on_city_id_and_social_profile_id", unique: true
   end
 
   create_table "companies", force: :cascade do |t|
@@ -47,11 +50,13 @@ ActiveRecord::Schema.define(version: 2018_08_28_035607) do
   create_table "companies_profiles", id: false, force: :cascade do |t|
     t.bigint "company_id", null: false
     t.bigint "profile_id", null: false
+    t.index ["company_id", "profile_id"], name: "index_companies_profiles_on_company_id_and_profile_id", unique: true
   end
 
   create_table "companies_social_profiles", id: false, force: :cascade do |t|
     t.bigint "company_id", null: false
     t.bigint "social_profile_id", null: false
+    t.index ["company_id", "social_profile_id"], name: "index_companies_social_profiles_unique", unique: true
   end
 
   create_table "countries", force: :cascade do |t|
@@ -71,10 +76,11 @@ ActiveRecord::Schema.define(version: 2018_08_28_035607) do
   create_table "emails_profiles", id: false, force: :cascade do |t|
     t.bigint "email_id", null: false
     t.bigint "profile_id", null: false
+    t.index ["email_id", "profile_id"], name: "index_emails_profiles_on_email_id_and_profile_id", unique: true
   end
 
   create_table "neighbourhoods", force: :cascade do |t|
-    t.bigint "city_id"
+    t.bigint "city_id", null: false
     t.string "name", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -86,11 +92,13 @@ ActiveRecord::Schema.define(version: 2018_08_28_035607) do
   create_table "neighbourhoods_profiles", id: false, force: :cascade do |t|
     t.bigint "neighbourhood_id", null: false
     t.bigint "profile_id", null: false
+    t.index ["neighbourhood_id", "profile_id"], name: "index_neighbourhoods_profiles_unique", unique: true
   end
 
   create_table "neighbourhoods_social_profiles", id: false, force: :cascade do |t|
     t.bigint "neighbourhood_id", null: false
     t.bigint "social_profile_id", null: false
+    t.index ["neighbourhood_id", "social_profile_id"], name: "index_neighbourhoods_social_profiles_unique", unique: true
   end
 
   create_table "phones", force: :cascade do |t|
@@ -103,6 +111,7 @@ ActiveRecord::Schema.define(version: 2018_08_28_035607) do
   create_table "phones_profiles", id: false, force: :cascade do |t|
     t.bigint "phone_id", null: false
     t.bigint "profile_id", null: false
+    t.index ["phone_id", "profile_id"], name: "index_phones_profiles_on_phone_id_and_profile_id", unique: true
   end
 
   create_table "profiles", force: :cascade do |t|
@@ -114,21 +123,27 @@ ActiveRecord::Schema.define(version: 2018_08_28_035607) do
     t.string "avatar_url"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["first_name", "age"], name: "index_profiles_on_first_name_and_age"
+    t.index ["last_name", "first_name", "age"], name: "index_profiles_on_last_name_and_first_name_and_age"
+    t.index ["last_name", "middle_name", "first_name", "age"], name: "index_profiles_last_middle_first_age"
   end
 
   create_table "profiles_school_departments", id: false, force: :cascade do |t|
     t.bigint "school_department_id", null: false
     t.bigint "profile_id", null: false
+    t.index ["profile_id", "school_department_id"], name: "index_profiles_school_departments_unique", unique: true
   end
 
   create_table "profiles_schools", id: false, force: :cascade do |t|
     t.bigint "school_id", null: false
     t.bigint "profile_id", null: false
+    t.index ["profile_id", "school_id"], name: "index_profiles_schools_on_profile_id_and_school_id", unique: true
   end
 
   create_table "profiles_social_profiles", id: false, force: :cascade do |t|
     t.bigint "profile_id", null: false
     t.bigint "social_profile_id", null: false
+    t.index ["profile_id", "social_profile_id"], name: "index_profiles_social_profiles_unique", unique: true
   end
 
   create_table "profiles_stigmas", id: false, force: :cascade do |t|
@@ -138,12 +153,14 @@ ActiveRecord::Schema.define(version: 2018_08_28_035607) do
     t.integer "down_votes", default: 0, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["profile_id", "stigma_id"], name: "index_profiles_stigmas_on_profile_id_and_stigma_id", unique: true
   end
 
   create_table "question_options", force: :cascade do |t|
     t.bigint "question_id", null: false
     t.string "option", null: false
     t.integer "order"
+    t.index ["question_id", "order"], name: "index_question_options_on_question_id_and_order"
     t.index ["question_id"], name: "index_question_options_on_question_id"
   end
 
@@ -154,12 +171,14 @@ ActiveRecord::Schema.define(version: 2018_08_28_035607) do
     t.integer "order"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["review_type_id", "order"], name: "index_questions_three_columns"
     t.index ["review_type_id"], name: "index_questions_on_review_type_id"
   end
 
   create_table "questions_reviews", id: false, force: :cascade do |t|
     t.bigint "review_id", null: false
     t.bigint "question_id", null: false
+    t.index ["question_id", "review_id"], name: "index_questions_reviews_on_question_id_and_review_id", unique: true
   end
 
   create_table "review_types", force: :cascade do |t|
@@ -192,10 +211,11 @@ ActiveRecord::Schema.define(version: 2018_08_28_035607) do
   create_table "school_departments_social_profiles", id: false, force: :cascade do |t|
     t.bigint "school_department_id", null: false
     t.bigint "social_profile_id", null: false
+    t.index ["school_department_id", "social_profile_id"], name: "index_school_departments_social_profiles_unique", unique: true
   end
 
   create_table "school_types", force: :cascade do |t|
-    t.string "name"
+    t.string "name", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["name"], name: "index_school_types_on_name", unique: true
@@ -207,6 +227,7 @@ ActiveRecord::Schema.define(version: 2018_08_28_035607) do
     t.string "avatar_url"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["name"], name: "index_schools_on_name"
     t.index ["school_type_id", "name"], name: "index_schools_on_school_type_id_and_name", unique: true
     t.index ["school_type_id"], name: "index_schools_on_school_type_id"
   end
@@ -214,10 +235,11 @@ ActiveRecord::Schema.define(version: 2018_08_28_035607) do
   create_table "schools_social_profiles", id: false, force: :cascade do |t|
     t.bigint "school_id", null: false
     t.bigint "social_profile_id", null: false
+    t.index ["school_id", "social_profile_id"], name: "index_schools_social_profiles_unique", unique: true
   end
 
   create_table "social_profiles", force: :cascade do |t|
-    t.string "social_profile_type"
+    t.string "social_profile_type", null: false
     t.string "profile_url"
     t.string "avatar_url"
     t.string "first_name"
@@ -225,6 +247,8 @@ ActiveRecord::Schema.define(version: 2018_08_28_035607) do
     t.string "user_name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["first_name"], name: "index_social_profiles_on_first_name"
+    t.index ["last_name", "first_name"], name: "index_social_profiles_on_last_name_and_first_name"
   end
 
   create_table "states", force: :cascade do |t|
