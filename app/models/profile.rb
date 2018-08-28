@@ -25,4 +25,6 @@ class Profile < ApplicationRecord
 
   has_many :profiles_school_departments
   has_many :school_departments, through: :profiles_school_departments
+
+  has_many :reviews
 end
