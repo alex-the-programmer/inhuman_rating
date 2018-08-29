@@ -8,4 +8,5 @@ class City < ApplicationRecord
   has_many :social_profiles, through: :cities_social_profiles
 
   belongs_to :country
+  belongs_to :state
 end

@@ -11,7 +11,7 @@ class Profile < ApplicationRecord
   has_many :profile_stigmas
   has_many :stigmas, through: :profile_stigmas
 
-  as_many :phones_profiles
+  has_many :phones_profiles
   has_many :phones, through: :phones_profiles
 
   has_many :email_profiles
