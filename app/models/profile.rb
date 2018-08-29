@@ -14,8 +14,8 @@ class Profile < ApplicationRecord
   has_many :phones_profiles
   has_many :phones, through: :phones_profiles
 
-  has_many :email_profiles
-  has_many :emails, through: :email_profiles
+  has_many :emails_profiles
+  has_many :emails, through: :emails_profiles
 
   has_many :companies_profiles
   has_many :companies, through: :companies_profiles

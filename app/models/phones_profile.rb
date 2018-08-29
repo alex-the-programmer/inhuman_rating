@@ -1,4 +1,4 @@
 class PhonesProfile < ApplicationRecord
   belongs_to :phone
-  belongs_to :profie
+  belongs_to :profile
 end
