@@ -3,9 +3,9 @@ class SchoolDepartment < ApplicationRecord
 
   belongs_to :school
 
-  has_many :profile_school_departments
+  has_many :profiles_school_departments
   has_many :profiles, through: :profiles_school_departments
 
-  has_many :school_department_social_profiles
+  has_many :school_departments_social_profiles
   has_many :social_profiles, through: :school_departments_social_profiles
 end
