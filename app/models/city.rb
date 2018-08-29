@@ -3,7 +3,7 @@ class City < ApplicationRecord
 
   has_many :neighbourhoods
 
-  has_many :cities_profiles
+  has_many :citiy_profiles
   has_many :profiles, through: :cities_profiles
 
   has_many :cities_social_profiles

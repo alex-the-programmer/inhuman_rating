@@ -1,4 +1,4 @@
-class SchoolDepartmentsSocialProfile < ApplicationRecord
+class SchoolDepartmentSocialProfile < ApplicationRecord
   belongs_to :school_department
   belongs_to :social_profile
 end

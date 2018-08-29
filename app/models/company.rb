@@ -1,7 +1,7 @@
 class Company < ApplicationRecord
   validates_presence_of :name
 
-  has_many :companies_profiles
+  has_many :company_profiles
   has_many :profiles, through: :companies_profiles
 
   has_many :companies_social_profiles
