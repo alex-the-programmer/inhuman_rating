@@ -10,10 +10,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_08_28_040601) do
+ActiveRecord::Schema.define(version: 2018_08_28_052355) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "answers", force: :cascade do |t|
+    t.bigint "review_id", null: false
+    t.bigint "question_id", null: false
+    t.string "answer_text"
+    t.integer "question_option_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["question_id", "review_id"], name: "index_answers_on_question_id_and_review_id", unique: true
+  end
 
   create_table "cities", force: :cascade do |t|
     t.bigint "country_id", null: false
@@ -175,12 +185,6 @@ ActiveRecord::Schema.define(version: 2018_08_28_040601) do
     t.index ["review_type_id"], name: "index_questions_on_review_type_id"
   end
 
-  create_table "questions_reviews", id: false, force: :cascade do |t|
-    t.bigint "review_id", null: false
-    t.bigint "question_id", null: false
-    t.index ["question_id", "review_id"], name: "index_questions_reviews_on_question_id_and_review_id", unique: true
-  end
-
   create_table "review_types", force: :cascade do |t|
     t.string "name", null: false
     t.datetime "created_at", null: false
@@ -271,6 +275,9 @@ ActiveRecord::Schema.define(version: 2018_08_28_040601) do
     t.index ["stigma_type", "name"], name: "index_stigmas_on_stigma_type_and_name", unique: true
   end
 
+  add_foreign_key "answers", "question_options"
+  add_foreign_key "answers", "questions"
+  add_foreign_key "answers", "reviews"
   add_foreign_key "cities", "countries"
   add_foreign_key "cities", "states"
   add_foreign_key "cities_profiles", "cities"
@@ -300,8 +307,6 @@ ActiveRecord::Schema.define(version: 2018_08_28_040601) do
   add_foreign_key "profiles_stigmas", "stigmas"
   add_foreign_key "question_options", "questions"
   add_foreign_key "questions", "review_types"
-  add_foreign_key "questions_reviews", "questions"
-  add_foreign_key "questions_reviews", "reviews"
   add_foreign_key "reviews", "profiles"
   add_foreign_key "reviews", "review_types"
   add_foreign_key "school_departments_social_profiles", "school_departments"

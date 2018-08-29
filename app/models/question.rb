@@ -3,6 +3,6 @@ class Question < ApplicationRecord
 
   belongs_to :review_type
 
-  has_many :review_questions
-  has_many :reviews, through: :review_questions
+  has_many :answers
+  has_many :reviews, through: :answers
 end
