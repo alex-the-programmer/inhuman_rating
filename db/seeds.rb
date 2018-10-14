@@ -40,7 +40,8 @@ stigma3 = Stigma.create!(name: 'stigma 3', stigma_type: 'Type 2')
 stigma4 = Stigma.create!(name: 'stigma 4', stigma_type: 'Type 4')
 
 # PROFILES
-social_profile_1 = SocialProfile.create!(first_name: 'Alex',
+social_profile_1 = SocialProfile.create!(profile_url: 'http://www.google.com',
+                                         first_name: 'Alex',
                                          last_name: 'Programmer',
                                          social_profile_type: 'Facebook',
                                          schools: [stanford],
@@ -49,7 +50,8 @@ social_profile_1 = SocialProfile.create!(first_name: 'Alex',
                                          neighbourhoods: [inner_richmond, marina],
                                          companies: [company1, company2],)
 
-social_profile_2 = SocialProfile.create!(first_name: 'Alex',
+social_profile_2 = SocialProfile.create!(profile_url: 'http://www.google.com',
+                                         first_name: 'Alex',
                                          last_name: 'Programmer',
                                          social_profile_type: 'Instagram',
                                          user_name:'alex-the-programmer')
@@ -68,8 +70,8 @@ profile1 = Profile.create!(first_name: 'Alex',
                            stigmas: [stigma1, stigma2, stigma3, stigma4])
 
 # REVIEW TYPES
-review_type1 = ReviewType.crate!(name: 'Review Type 1')
-review_type2 = ReviewType.crate!(name: 'Review Type 2')
+review_type1 = ReviewType.create!(name: 'Review Type 1')
+review_type2 = ReviewType.create!(name: 'Review Type 2')
 
 question1 = Question.create!(review_type: review_type1, question: 'What do you think of... ?', order: 1)
 question2 = Question.create!(review_type: review_type1, question: 'How about X... ?', order: 2)

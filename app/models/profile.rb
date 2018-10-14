@@ -1,6 +1,6 @@
 class Profile < ApplicationRecord
   has_many :profiles_social_profiles
-  has_many :social_profiles, through: :profiles_solial_profiles
+  has_many :social_profiles, through: :profiles_social_profiles
 
   has_many :cities_profiles
   has_many :cities, through: :cities_profiles
@@ -8,8 +8,8 @@ class Profile < ApplicationRecord
   has_many :neighbourhoods_profiles
   has_many :neighbourhoods, through: :neighbourhoods_profiles
 
-  has_many :profile_stigmas
-  has_many :stigmas, through: :profile_stigmas
+  has_many :profiles_stigmas
+  has_many :stigmas, through: :profiles_stigmas
 
   has_many :phones_profiles
   has_many :phones, through: :phones_profiles

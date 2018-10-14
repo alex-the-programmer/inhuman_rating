@@ -8,7 +8,7 @@ class SocialProfile < ApplicationRecord
   has_many :cities, through: :cities_social_profiles
 
   has_many :neighbourhoods_social_profiles
-  has_many :neighbourhoods, through: :cities_social_profiles
+  has_many :neighbourhoods, through: :neighbourhoods_social_profiles
 
   has_many :companies_social_profiles
   has_many :companies, through: :companies_social_profiles
