@@ -40,6 +40,20 @@ stigma3 = Stigma.create!(name: 'stigma 3', stigma_type: 'Type 2')
 stigma4 = Stigma.create!(name: 'stigma 4', stigma_type: 'Type 4')
 
 # PROFILES
+social_profile_1 = SocialProfile.create!(first_name: 'Alex',
+                                         last_name: 'Programmer',
+                                         social_profile_type: 'Facebook',
+                                         schools: [stanford],
+                                         school_departments: [mit_cs],
+                                         cities: [sunnyvale, sf],
+                                         neighbourhoods: [inner_richmond, marina],
+                                         companies: [company1, company2],)
+
+social_profile_2 = SocialProfile.create!(first_name: 'Alex',
+                                         last_name: 'Programmer',
+                                         social_profile_type: 'Instagram',
+                                         user_name:'alex-the-programmer')
+
 profile1 = Profile.create!(first_name: 'Alex',
                            last_name: 'Programmer',
                            age: 27,
@@ -50,5 +64,7 @@ profile1 = Profile.create!(first_name: 'Alex',
                            cities: [sunnyvale, sf],
                            neighbourhoods: [inner_richmond, marina],
                            companies: [company1, company2],
+                           social_profiles: [social_profile_1, social_profile_2],
                            stigmas: [stigma1, stigma2, stigma3, stigma4])
+
 
