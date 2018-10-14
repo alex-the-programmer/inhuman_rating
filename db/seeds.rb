@@ -67,4 +67,30 @@ profile1 = Profile.create!(first_name: 'Alex',
                            social_profiles: [social_profile_1, social_profile_2],
                            stigmas: [stigma1, stigma2, stigma3, stigma4])
 
+# REVIEW TYPES
+review_type1 = ReviewType.crate!(name: 'Review Type 1')
+review_type2 = ReviewType.crate!(name: 'Review Type 2')
+
+question1 = Question.create!(review_type: review_type1, question: 'What do you think of... ?', order: 1)
+question2 = Question.create!(review_type: review_type1, question: 'How about X... ?', order: 2)
+question3 = Question.create!(review_type: review_type2, question: 'What is... ?', order: 1)
+question4 = Question.create!(review_type: review_type2, question: 'How good is Y ?', order: 2)
+
+q1_opt1 = QuestionOption.create(question: question1, option: 'Good', order: 1)
+q1_opt2 = QuestionOption.create(question: question1, option: 'Bad', order: 2)
+# todo elaborate option types like boolean, slider, free text
+
+review1 = Review.create!(review_type: review_type1,
+                         profile1: profile1,
+                         text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum')
+
+rev1_answer1 = Answer.create!(review: review1, question: question1, option: q1_opt1)
+rev1_answer2 = Answer.create!(review: review1, question: question2, answer_text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit')
+
+review2 = Review.create!(review_type: review_type2,
+                         profile1: profile1,
+                         text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum')
+
+rev2_answer1 = Answer.create!(review: review2, question: question1, option: q1_opt2)
+rev2_answer2 = Answer.create!(review: review2, question: question2, answer_text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit')
 
