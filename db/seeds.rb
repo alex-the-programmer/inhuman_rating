@@ -12,13 +12,13 @@ state = State.create!(name: 'California', acronym: 'CA', country: country)
 sf=City.create!(name: 'San Francisco', country: country, state: state)
 sunnyvale=City.create!(name: 'Sunnyvale', country: country, state: state)
 marina = Neighbourhood.create!(name: 'Marina', city: sf)
-inner_richmond = Neighbourhood.create!('Inner Richmond', city: sf)
+inner_richmond = Neighbourhood.create!(name: 'Inner Richmond', city: sf)
 
 # CONTACT INFO
 email1=Email.create!(email: 'alex@alex.com')
 email2=Email.create!(email: 'other@alex.com')
-phone1 = Phoene.create!(phone: '1234567891')
-phone2 = Phoene.create!(phone: '1234567892')
+phone1 = Phone.create!(phone: '1234567891')
+phone2 = Phone.create!(phone: '1234567892')
 
 # COMPANIES
 company1 = Company.create!(name: 'Evil, Corp')
